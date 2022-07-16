@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Coroutine movementRoutine;
 
-    public event Action OnMovementFinish, OnBonked;
+    public event Action OnMovementStart, OnMovementFinish, OnBonked;
 
     public void SetInstantLocation(Vector2Int position)
     {
@@ -39,6 +39,8 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator MoveSteps(int steps)
     {
+        OnMovementStart?.Invoke();
+
         while (steps > 0)
         {
             var nextPosition = currentPosition.Position + GetMovement();

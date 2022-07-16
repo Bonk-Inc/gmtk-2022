@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class AudioSetting : MonoBehaviour
 {
-
     [SerializeField]
     private string settingName;
     [SerializeField]
@@ -20,6 +20,9 @@ public class AudioSetting : MonoBehaviour
 
     [SerializeField]
     private float minDB = -80, maxDB = 0;
+
+    [SerializeField]
+    private UnityEvent OnVolumeSet;
 
     private string playerPrefKey;
 
@@ -35,6 +38,8 @@ public class AudioSetting : MonoBehaviour
     private void SetVolume(){
         mixer.SetFloat(mixerSetting, LinearToLog(slider.value));
         PlayerPrefs.SetFloat(playerPrefKey, LinearToLog(slider.value));
+
+        OnVolumeSet?.Invoke();
     }
 
     private float LogToLinear(float log){
