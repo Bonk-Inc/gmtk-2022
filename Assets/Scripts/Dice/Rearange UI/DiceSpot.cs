@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DiceSpot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class DiceSpot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [SerializeField]
     private int position;
@@ -16,7 +16,7 @@ public class DiceSpot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public ActionDie Die => die;
 
-    public Action<DiceSpot> MouseOver, MouseLeave;
+    public Action<DiceSpot> MouseOver, MouseLeave, OnClick;
 
     public void SetDie(ActionDie die){
         if(die != null){
@@ -43,5 +43,10 @@ public class DiceSpot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void OnPointerExit(PointerEventData eventData)
     {
         MouseLeave?.Invoke(this);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        OnClick?.Invoke(this);
     }
 }

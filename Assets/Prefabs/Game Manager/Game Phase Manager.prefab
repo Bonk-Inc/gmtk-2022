@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1228732916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1228732917}
+  - component: {fileID: 1228732918}
+  m_Layer: 0
+  m_Name: Rethrow Phase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1228732917
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228732916}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5191018901294781333}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1228732918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228732916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f6f4fde19b7c6740a0159814b3ae076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rethrowButton: {fileID: 0}
+  selector: {fileID: 0}
+  manager: {fileID: 0}
 --- !u!1 &5191018901294781334
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,6 +79,7 @@ Transform:
   m_Children:
   - {fileID: 5191018902426653541}
   - {fileID: 5191018901303740716}
+  - {fileID: 1228732917}
   - {fileID: 5191018902045625641}
   - {fileID: 5191018901628745729}
   m_Father: {fileID: 0}
@@ -69,8 +117,10 @@ MonoBehaviour:
   - type: 1
     phase: {fileID: 5191018901303740717}
   - type: 2
-    phase: {fileID: 5191018902045625646}
+    phase: {fileID: 1228732918}
   - type: 3
+    phase: {fileID: 5191018902045625646}
+  - type: 4
     phase: {fileID: 5191018901628745734}
 --- !u!1 &5191018901303740719
 GameObject:

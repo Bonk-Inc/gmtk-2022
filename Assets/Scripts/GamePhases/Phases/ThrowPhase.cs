@@ -18,7 +18,7 @@ public class ThrowPhase : GamePhase
 
     private IEnumerator ThrowDice(GamePhaseStateMachine statemachine){
         yield return StartCoroutine(dice.ThrowAll());
-        statemachine.SetState(GamePhaseType.REARRANGE);
+        statemachine.SetState(GamePhaseType.RETHROW);
     }
 
 }

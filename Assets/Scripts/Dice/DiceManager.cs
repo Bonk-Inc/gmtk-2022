@@ -21,7 +21,6 @@ public class DiceManager : MonoBehaviour
         }
     }
 
-    [ContextMenu("throw")]
     public void ThrowAllDice(){
         StartCoroutine(ThrowAll());
     }
@@ -31,6 +30,17 @@ public class DiceManager : MonoBehaviour
         var diceThrows = new Coroutine[dice.Count];
 
         for (int i = 0; i < dice.Count; i++)
+        {
+            diceThrows[i] = StartCoroutine(dice[i].Throw());
+        }
+        yield return StartCoroutine(CoroutineHelper.WaitForAll(diceThrows));
+    }
+
+    public IEnumerator Throw(ActionDie[] dice){
+
+        var diceThrows = new Coroutine[dice.Length];
+
+        for (int i = 0; i < dice.Length; i++)
         {
             diceThrows[i] = StartCoroutine(dice[i].Throw());
         }
