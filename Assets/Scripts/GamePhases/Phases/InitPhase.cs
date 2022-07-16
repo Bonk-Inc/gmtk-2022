@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class InitPhase : GamePhase
 {
-    public override void EnterPhase(GamePhaseStateMachine statemachine){
+    [SerializeField, Header("Dependencies")]
+    private PlayerMovement playerMovement;
+    [SerializeField, Header("Settings")]
+    private Vector2Int startPosition;
+
+    public override void EnterPhase(GamePhaseStateMachine statemachine) {
+        playerMovement.SetInstantLocation(startPosition);
         //TODO fly camera over level
         statemachine.SetState(GamePhaseType.THROW);
     }
