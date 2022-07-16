@@ -10,7 +10,6 @@ public class InitPhase : GamePhase
     private Vector2Int startPosition;
 
     public override void EnterPhase(GamePhaseStateMachine statemachine) {
-        print(startPosition);
         playerMovement.SetInstantLocation(startPosition);
         //TODO fly camera over level
         statemachine.SetState(GamePhaseType.THROW);
