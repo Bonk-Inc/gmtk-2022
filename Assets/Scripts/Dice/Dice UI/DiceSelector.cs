@@ -13,6 +13,8 @@ public class DiceSelector : MonoBehaviour
 
     private List<int> selected;
 
+    public List<DiceSpot> Spots => spots;
+
     public void StartSelecting()
     {
         selected = new List<int>();
@@ -24,12 +26,14 @@ public class DiceSelector : MonoBehaviour
             {
                 if (selected.Contains(spotIndex))
                 {
-                    spots[spotIndex].Die.transform.Translate(0, -selectedDiceMoveAmount, 0);
+                    ((RectTransform)spots[spotIndex].transform).sizeDelta = ((RectTransform)spots[spotIndex].transform).sizeDelta - new Vector2(0, selectedDiceMoveAmount);
+                    spots[spotIndex].Die.transform.position += spots[spotIndex].transform.up * -selectedDiceMoveAmount  / 100;
                     selected.Remove(spotIndex);
                 }
                 else
                 {
-                    spots[spotIndex].Die.transform.Translate(0, selectedDiceMoveAmount, 0);
+                    ((RectTransform)spots[spotIndex].transform).sizeDelta = ((RectTransform)spots[spotIndex].transform).sizeDelta + new Vector2(0, selectedDiceMoveAmount);
+                    spots[spotIndex].Die.transform.position += spots[spotIndex].transform.up * selectedDiceMoveAmount  / 100 ;
                     selected.Add(spotIndex);
                 }
             };
@@ -44,18 +48,19 @@ public class DiceSelector : MonoBehaviour
             spot.OnClick = null;
             if (selected.Contains(i))
             {
-                spots[i].Die.transform.Translate(0, -selectedDiceMoveAmount, 0);
+                ((RectTransform)spots[i].transform).sizeDelta = ((RectTransform)spots[i].transform).sizeDelta - new Vector2(0, selectedDiceMoveAmount);
+                spots[i].Die.transform.position += spots[i].transform.up * -selectedDiceMoveAmount / 100; 
                 selected.Remove(i);
             }
         }
     }
 
-    public ActionDie[] GetSelectedDice()
+    public (DieVisual dice, DiceSpot spot)[] GetSelectedDice()
     {
-        ActionDie[] dice = new ActionDie[selected.Count];
+        (DieVisual dice, DiceSpot spot)[] dice = new (DieVisual dice, DiceSpot spot)[selected.Count];
         for (int i = 0; i < selected.Count; i++)
         {
-            dice[i] = spots[selected[i]].Die;
+            dice[i] = (spots[selected[i]].Die, spots[selected[i]]);//TODO
         }
         return dice;
     }

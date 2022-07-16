@@ -23,11 +23,13 @@ public class DiceThrowHandler : MonoBehaviour
     [SerializeField]
     private DiceSideChecker sideChecker;
 
-    private void Awake()
-    {
-        rb.isKinematic = true;
-        rb.detectCollisions = false;
-    }
+        [SerializeField]
+    private DieVisual dieVisual;
+
+    [SerializeField]
+    private ActionDie action;
+
+    public ActionDie ActionDie => action;
 
 
     [ContextMenu("Throw")]
@@ -37,13 +39,14 @@ public class DiceThrowHandler : MonoBehaviour
         rb.detectCollisions = true;
 
         rb.velocity = Vector3.up * up + Vector3.forward * forward;
-        rb.angularVelocity = new Vector3(angularForce.RandomInRange(), angularForce.RandomInRange(), angularForce.RandomInRange());
+        rb.angularVelocity = Random.insideUnitSphere * angularForce.RandomInRange();
         return StartCoroutine(DetectLanded());
     }
 
     private IEnumerator DetectLanded()
     {
         int stillCounter = 0;
+            
         while (stillCounter < stillCheckDelay)
         {
             while (rb.angularVelocity.magnitude > maxLandedPower || rb.velocity.magnitude > maxLandedPower)
@@ -51,10 +54,16 @@ public class DiceThrowHandler : MonoBehaviour
                 stillCounter = 0;
                 yield return null;
             }
-
             stillCounter++;
             yield return null;
         }
+    }
+
+    public DieVisual GetRotatedVisual(){
+        var visual = Instantiate(dieVisual);
+        visual.physicalDie = this;
+        visual.transform.localRotation = sideChecker.GetCurrentSide().Display.localRotation;
+        return visual;
     }
 
 }

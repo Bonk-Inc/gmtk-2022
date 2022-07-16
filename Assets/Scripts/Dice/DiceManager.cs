@@ -8,6 +8,9 @@ public class DiceManager : MonoBehaviour
     [SerializeField]
     private List<ActionDie> dice;
 
+    [SerializeField]
+    private DiceSpot[] spots;
+
     public List<ActionDie> Dice => dice;
 
     public void PlayDiceActionSequence(){
@@ -45,6 +48,15 @@ public class DiceManager : MonoBehaviour
             diceThrows[i] = StartCoroutine(dice[i].Throw());
         }
         yield return StartCoroutine(CoroutineHelper.WaitForAll(diceThrows));
+    }
+
+    public void Clear(){
+        for (int i = 0; i < spots.Length; i++)
+        {
+            if(spots[i].transform.childCount > 0){
+                Destroy(spots[i].transform.GetChild(0).gameObject);
+            }
+        }
     }
 
 }

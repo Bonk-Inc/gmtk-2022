@@ -6,20 +6,20 @@ public class DiceSideChecker : MonoBehaviour
 {
     
     [SerializeField]
-    private Transform[] sides;
+    private DieSide[] sides;
 
-    public int GetCurrentValue(){
+    public DieSide GetCurrentSide(){
         int smallestAngleTransformIndex = -1;
         float angle = float.MaxValue;
         for (int i = 0; i < sides.Length; i++)
         {
-            var currentAngle = Vector3.Angle(transform.position + Vector3.down, transform.position + sides[i].up);
+            var currentAngle = Vector3.Angle(transform.position + Vector3.down, transform.position + sides[i].Up);
             if(currentAngle < angle){
                 angle = currentAngle;
                 smallestAngleTransformIndex = i;
             }
         }
-        return smallestAngleTransformIndex+1;//+1 for index to value
+        return sides[smallestAngleTransformIndex];//+1 for index to value
     }
 
 }

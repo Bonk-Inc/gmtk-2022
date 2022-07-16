@@ -5,7 +5,16 @@ using UnityEngine;
 public abstract class ActionDie : MonoBehaviour
 {
 
-    public abstract IEnumerator Throw();
+    [SerializeField]
+    private DiceThrowHandler thrower;
+
+    public virtual IEnumerator Throw(){
+        yield return thrower.Throw();
+    }
+
+    public virtual DieVisual Getvisual(){
+        return thrower.GetRotatedVisual();
+    }
 
     public abstract IEnumerator PlayAction();
 
