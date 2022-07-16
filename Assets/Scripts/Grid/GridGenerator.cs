@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 [System.Serializable]
 public class GridGenerator : MonoBehaviour
@@ -43,6 +44,7 @@ public class GridGenerator : MonoBehaviour
                 CreateTile(i, j);
             }
         }
+        EditorUtility.SetDirty(gameObject);
         print("Grid Created.");
         return rows;
     }
