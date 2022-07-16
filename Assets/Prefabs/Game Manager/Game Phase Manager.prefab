@@ -301,3 +301,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c9951c5f717fa4a8c0ee8e62eb99b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovement: {fileID: 0}
+  startPosition: {x: 5, y: 1}

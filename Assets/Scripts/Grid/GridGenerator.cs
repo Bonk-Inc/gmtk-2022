@@ -28,16 +28,14 @@ public class GridGenerator : MonoBehaviour
     [ExecuteInEditMode, ContextMenu("Create Grid")]
     public GridRow[] CreateGrid()
     {
-        if (tileHolder == null) CreateHolder();
-        if (tileHolder.childCount > 0) ResetGrid();
+        if (transform.childCount == 0) CreateHolder();
+        if (tileHolder == null || tileHolder.childCount > 0) ResetGrid();
 
         rows = new GridRow[x];
 
         for (int i = 0; i < x; i++)
         {
-            var row = new GridRow();
-            rows[i] = row;
-            print(rows[i]);
+            rows[i] = new GridRow();
             rows[i].Tiles = new GridTile[z];
 
             for (int j = 0; j < z; j++)
@@ -45,22 +43,29 @@ public class GridGenerator : MonoBehaviour
                 CreateTile(i, j);
             }
         }
-        print("Grid Created." + rows );
+        print("Grid Created.");
         return rows;
     }
 
     private void CreateTile(int xPos, int zPos)
     {
         var tile = Instantiate(tilePreset, tileHolder);
+
         tile.transform.position = new Vector3(xPos * tileSize, 0, zPos * tileSize);
         tile.name = "Tile - " + (xPos+1) + " " + (zPos+1);
+        tile.SetPosition(new Vector2Int(xPos, zPos));
+        
         rows[xPos].Tiles[zPos] = tile;
     }
 
     [ExecuteInEditMode, ContextMenu("Reset Grid")]
     private void ResetGrid()
     {
-        if(tileHolder != null) DestroyImmediate(tileHolder.gameObject);
+        if (transform.childCount != 0)
+        {
+            DestroyImmediate(transform.GetChild(0).gameObject);
+            tileHolder = null;
+        }
         CreateHolder();
     }
 

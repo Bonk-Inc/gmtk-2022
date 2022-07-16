@@ -5,20 +5,15 @@ using UnityEngine;
 public class GridTile : MonoBehaviour
 {
     [SerializeField] // Should be read only
-    private Vector2 position;
+    private Vector2Int position;
 
     [SerializeField]
     private bool blocked = false;
 
-    public Vector2 Position { get => position; }
+    public Vector2Int Position { get => position; }
     public bool Blocked { get => blocked; set => blocked = value; }
 
-    public GridTile(Vector2 pos)
-    {
-        SetPosition(pos);
-    }
-
-    public void SetPosition(Vector2 pos)
+    public void SetPosition(Vector2Int pos)
     {
         position = pos;
     }
