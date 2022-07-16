@@ -18,6 +18,7 @@ public class PlayPhase : GamePhase
 
     private IEnumerator PlayActions(GamePhaseStateMachine statemachine){
         yield return StartCoroutine(dice.PlayDiceActions());
+        dice.Clear();
         statemachine.SetState(GamePhaseType.THROW);//TODO might change to npc turn later
     }
 }

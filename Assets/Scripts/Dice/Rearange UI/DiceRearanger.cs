@@ -17,7 +17,7 @@ public class DiceRearanger : MonoBehaviour
     [SerializeField]
     private int currentEmpty;
 
-    private ActionDie draggingDie = null;
+    private DieVisual draggingDie = null;
 
     [SerializeField]
     private Button finishRearrangeButton;
@@ -80,7 +80,7 @@ public class DiceRearanger : MonoBehaviour
             spots[i].MouseOver = null;
             spots[i].MouseLeave = null;
 
-            manager.Dice[i] = spots[i].Die;
+            manager.Dice[i] = spots[i].Die.physicalDie.ActionDie;
         }
         isRearanging = false;
         OnRearrangeFinished?.Invoke();
@@ -102,8 +102,11 @@ public class DiceRearanger : MonoBehaviour
                 // position.x = mousePos.x;
                 // position.y = mousePos.y;
                 // draggingDie.transform.position = position;
-
-                draggingDie.transform.position = Input.mousePosition;
+                var diepos = draggingDie.transform.position;
+                diepos = cam.ScreenToWorldPoint(Input.mousePosition);
+                diepos.z = draggingDie.transform.position.z;
+                draggingDie.transform.position = diepos;
+                
             }
             if (draggingDie != null && Input.GetMouseButtonUp(0))
             {

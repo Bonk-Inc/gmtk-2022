@@ -12,15 +12,15 @@ public class DiceSpot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public int Position => position;
 
     [SerializeField]
-    private ActionDie die;
+    private DieVisual die;
 
-    public ActionDie Die => die;
+    public DieVisual Die => die;
 
     public Action<DiceSpot> MouseOver, MouseLeave, OnClick;
 
-    public void SetDie(ActionDie die){
+    public void SetDie(DieVisual die){
         if(die != null){
-            die.transform.SetParent(transform);
+            die.transform.SetParent(transform, false);
             die.transform.localPosition = Vector3.zero;
         }
         this.die = die;

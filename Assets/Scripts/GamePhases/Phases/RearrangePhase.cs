@@ -8,6 +8,9 @@ public class RearrangePhase : GamePhase
     [SerializeField]
     private DiceRearanger rearanger;
 
+    [SerializeField]
+    private DiceManager manager;
+
     private GamePhaseStateMachine statemachine;
 
     public override void EnterPhase(GamePhaseStateMachine statemachine)
