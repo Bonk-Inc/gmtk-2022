@@ -9,7 +9,7 @@ public class DiceThrowHandler : MonoBehaviour
     private Rigidbody rb;
 
     [SerializeField]
-    private FloatNumberRange angularForce;
+    private FloatNumberRange angularForce, throwForce;
 
     [SerializeField]
     private float up = 12, forward = 3;
@@ -33,12 +33,13 @@ public class DiceThrowHandler : MonoBehaviour
 
 
     [ContextMenu("Throw")]
-    public Coroutine Throw()
+    public Coroutine Throw(Vector3 dir, Vector3 start)
     {
         rb.isKinematic = false;
         rb.detectCollisions = true;
 
-        rb.velocity = Vector3.up * up + Vector3.forward * forward;
+        rb.position = start;
+        rb.velocity = dir.normalized * throwForce.RandomInRange();
         rb.angularVelocity = Random.insideUnitSphere * angularForce.RandomInRange();
         return StartCoroutine(DetectLanded());
     }

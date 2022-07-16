@@ -6,6 +6,9 @@ public class DiceManager : MonoBehaviour
 {
 
     [SerializeField]
+    private Camera cam;
+
+    [SerializeField]
     private List<ActionDie> dice;
 
     [SerializeField]
@@ -34,7 +37,7 @@ public class DiceManager : MonoBehaviour
 
         for (int i = 0; i < dice.Count; i++)
         {
-            diceThrows[i] = StartCoroutine(dice[i].Throw());
+            diceThrows[i] = StartCoroutine(dice[i].Throw(cam.transform.forward, cam.transform.position -cam.transform.forward*3 + (Vector3)Random.insideUnitCircle*15));
         }
         yield return StartCoroutine(CoroutineHelper.WaitForAll(diceThrows));
     }
@@ -45,7 +48,7 @@ public class DiceManager : MonoBehaviour
 
         for (int i = 0; i < dice.Length; i++)
         {
-            diceThrows[i] = StartCoroutine(dice[i].Throw());
+            diceThrows[i] = StartCoroutine(dice[i].Throw(cam.transform.forward, cam.transform.position -cam.transform.forward*3 + (Vector3)Random.insideUnitCircle*15));
         }
         yield return StartCoroutine(CoroutineHelper.WaitForAll(diceThrows));
     }
