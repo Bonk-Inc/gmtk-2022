@@ -26,9 +26,10 @@ public class PlayerMovement : MonoBehaviour
         ChangeTile(position);
     }
 
-    public void Move(int steps)
+    public Coroutine Move(int steps)
     {
         movementRoutine = StartCoroutine(MoveSteps(steps));
+        return movementRoutine;
     }
 
     public void Rotate(Direction direction)

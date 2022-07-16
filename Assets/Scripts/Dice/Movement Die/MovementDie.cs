@@ -6,9 +6,12 @@ using UnityEngine.UI;
 public class MovementDie : ActionDie
 {
 
+    [SerializeField]
+    private PlayerMovement movement;
+
     public override IEnumerator PlayAction()
     {
-        throw new System.NotImplementedException();
+        yield return movement.Move(Thrower.LastThrow);
     }
 
 }

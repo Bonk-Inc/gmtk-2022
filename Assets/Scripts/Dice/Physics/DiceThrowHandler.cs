@@ -31,6 +31,7 @@ public class DiceThrowHandler : MonoBehaviour
 
     public ActionDie ActionDie => action;
 
+    public int LastThrow {get; private set;} = 0;
 
     [ContextMenu("Throw")]
     public Coroutine Throw(Vector3 dir, Vector3 start)
@@ -58,6 +59,7 @@ public class DiceThrowHandler : MonoBehaviour
             stillCounter++;
             yield return null;
         }
+        LastThrow = sideChecker.GetCurrentSide().Value;
     }
 
     public DieVisual GetRotatedVisual(){
