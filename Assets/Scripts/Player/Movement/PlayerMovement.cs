@@ -21,6 +21,10 @@ public class PlayerMovement : MonoBehaviour
 
     public event Action OnMovementStart, OnMovementFinish, OnBonked;
 
+    private void Awake() {
+        Rotate(Direction.North);
+    }
+
     public void SetInstantLocation(Vector2Int position)
     {
         ChangeTile(position);

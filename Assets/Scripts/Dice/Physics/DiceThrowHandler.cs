@@ -12,9 +12,6 @@ public class DiceThrowHandler : MonoBehaviour
     private FloatNumberRange angularForce, throwForce;
 
     [SerializeField]
-    private float up = 12, forward = 3;
-
-    [SerializeField]
     private int stillCheckDelay = 10;
 
     [SerializeField]

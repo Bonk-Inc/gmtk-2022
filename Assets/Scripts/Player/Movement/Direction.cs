@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum Direction { 
-    North = 0, 
-    East = 1, 
-    South = 2, 
-    West = 3 
+    North = 1, 
+    East = 2, 
+    South = 3, 
+    West = 4
 };
 
