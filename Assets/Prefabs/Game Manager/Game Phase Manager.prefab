@@ -47,6 +47,71 @@ MonoBehaviour:
   rethrowButton: {fileID: 0}
   selector: {fileID: 0}
   manager: {fileID: 0}
+  visualContainer: {fileID: 0}
+--- !u!1 &5107701210578985063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6433887604808399526}
+  - component: {fileID: 1130231951431280728}
+  - component: {fileID: 1213823773}
+  m_Layer: 0
+  m_Name: Start Round Phase
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6433887604808399526
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5107701210578985063}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5191018901294781333}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1130231951431280728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5107701210578985063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e2dd2a0b456a5640a21bd9374fd10ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roundTracker: {fileID: 0}
+  sound: {fileID: 1213823773}
+  roundUI: {fileID: 0}
+  startingTime: 3
+--- !u!114 &1213823773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5107701210578985063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f80b7166bfcf1b54b8a524ef6013b3c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 0}
+  clips:
+  - {fileID: 8300000, guid: 4f28d5f16be4b744ba20416901f881e1, type: 3}
 --- !u!1 &5191018901294781334
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,12 +143,13 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5191018902426653541}
+  - {fileID: 6433887604808399526}
   - {fileID: 5191018901303740716}
   - {fileID: 1228732917}
   - {fileID: 5191018902045625641}
   - {fileID: 5191018901628745729}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5191018901294781332
 MonoBehaviour:
@@ -115,12 +181,14 @@ MonoBehaviour:
   - type: 0
     phase: {fileID: 5191018902426653562}
   - type: 1
-    phase: {fileID: 5191018901303740717}
+    phase: {fileID: 1130231951431280728}
   - type: 2
-    phase: {fileID: 1228732918}
+    phase: {fileID: 5191018901303740717}
   - type: 3
-    phase: {fileID: 5191018902045625646}
+    phase: {fileID: 1228732918}
   - type: 4
+    phase: {fileID: 5191018902045625646}
+  - type: 5
     phase: {fileID: 5191018901628745734}
 --- !u!1 &5191018901303740719
 GameObject:
@@ -257,6 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rearanger: {fileID: 0}
+  manager: {fileID: 0}
 --- !u!1 &5191018902426653540
 GameObject:
   m_ObjectHideFlags: 0

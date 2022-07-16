@@ -12,7 +12,7 @@ public class InitPhase : GamePhase
     public override void EnterPhase(GamePhaseStateMachine statemachine) {
         playerMovement.SetInstantLocation(startPosition);
         //TODO fly camera over level
-        statemachine.SetState(GamePhaseType.THROW);
+        statemachine.SetState(GamePhaseType.STARTROUND);
     }
     public override void LeavePhase(){}
 

@@ -7,6 +7,7 @@ public enum GamePhaseType
     DEFAULT = -1,
     INITIALIZE,
     
+    STARTROUND,
     THROW,
     RETHROW,
     REARRANGE,
