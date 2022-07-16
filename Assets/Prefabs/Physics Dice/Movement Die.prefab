@@ -68,6 +68,14 @@ PrefabInstance:
       propertyPath: dieVisual
       value: 
       objectReference: {fileID: 4471546333626256404, guid: d5c82d83317977b479287275370f1f4f, type: 3}
+    - target: {fileID: 1615791138153388881, guid: 201dc93666cda5c4d9861f6947117e1f, type: 3}
+      propertyPath: throwForce.max
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1615791138153388881, guid: 201dc93666cda5c4d9861f6947117e1f, type: 3}
+      propertyPath: throwForce.min
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1615791138153388883, guid: 201dc93666cda5c4d9861f6947117e1f, type: 3}
       propertyPath: m_RootOrder
       value: -1

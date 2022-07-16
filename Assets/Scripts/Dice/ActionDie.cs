@@ -8,8 +8,8 @@ public abstract class ActionDie : MonoBehaviour
     [SerializeField]
     private DiceThrowHandler thrower;
 
-    public virtual IEnumerator Throw(){
-        yield return thrower.Throw();
+    public virtual IEnumerator Throw(Vector3 dir, Vector3 start){
+        yield return thrower.Throw(dir, start);
     }
 
     public virtual DieVisual Getvisual(){
