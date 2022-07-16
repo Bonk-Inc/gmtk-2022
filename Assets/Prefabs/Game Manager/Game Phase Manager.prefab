@@ -245,6 +245,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5191018901628745729}
   - component: {fileID: 5191018901628745734}
+  - component: {fileID: 1022037284}
   m_Layer: 0
   m_Name: Play Phase
   m_TagString: Untagged
@@ -279,7 +280,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8796d639a6a9e554a89556fd4a11e549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sound: {fileID: 1022037284}
   dice: {fileID: 0}
+--- !u!114 &1022037284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5191018901628745728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f80b7166bfcf1b54b8a524ef6013b3c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 0}
+  clips:
+  - {fileID: 8300000, guid: 6a188de9cb2a01b4bae795cbe1ec1978, type: 3}
 --- !u!1 &5191018902045625640
 GameObject:
   m_ObjectHideFlags: 0
