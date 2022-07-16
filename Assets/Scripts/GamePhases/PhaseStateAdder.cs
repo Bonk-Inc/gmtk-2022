@@ -16,7 +16,7 @@ public class PhaseStateAdder : MonoBehaviour
     [SerializeField]
     private PhaseStateType[] states;
 
-    private void Awake() {
+    private void Start() {
         for (int i = 0; i < states.Length; i++)
         {
             machine.AddState(states[i].type, states[i].phase);

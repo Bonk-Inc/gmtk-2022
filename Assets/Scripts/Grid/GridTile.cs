@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class GridTile : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] // Should be read only
+    private Vector2 position;
+
+    [SerializeField]
+    private bool blocked = false;
+
+    public Vector2 Position { get => position; }
+    public bool Blocked { get => blocked; set => blocked = value; }
+
+    public GridTile(Vector2 pos)
     {
-        
+        SetPosition(pos);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetPosition(Vector2 pos)
     {
-        
+        position = pos;
     }
 }
