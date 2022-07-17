@@ -471,7 +471,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Artist - Prabhakar - '
+  m_text: Artist - Prabhakar - https://linktr.ee/prabhakar.deep
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cb9860f94e84b06498559bab95509ed1, type: 2}
   m_sharedMaterial: {fileID: -4969648968545969541, guid: cb9860f94e84b06498559bab95509ed1, type: 2}
