@@ -7,6 +7,8 @@ public class GridTileVisual : MonoBehaviour
     [SerializeField]
     private MeshRenderer meshRenderer;
 
+    public MeshRenderer MeshRenderer => meshRenderer;
+
     public void ToggleRender(bool show = false)
     {
         meshRenderer.enabled = show;

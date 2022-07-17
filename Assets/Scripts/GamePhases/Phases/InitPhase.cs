@@ -11,7 +11,7 @@ public class InitPhase : GamePhase
 
     public override void EnterPhase(GamePhaseStateMachine statemachine) {
         playerMovement.SetInstantLocation(startPosition.Position);
-        playerMovement.Rotate(startPosition.MoveDirection);
+        playerMovement.RotateInstant(startPosition.MoveDirection);
         //TODO fly camera over level
         statemachine.SetState(GamePhaseType.STARTROUND);
     }
