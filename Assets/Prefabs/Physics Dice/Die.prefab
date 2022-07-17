@@ -210,6 +210,7 @@ GameObject:
   - component: {fileID: 1615791138153388880}
   - component: {fileID: 1615791138153388881}
   - component: {fileID: 1615791138153388886}
+  - component: {fileID: 4590370241812254209}
   m_Layer: 0
   m_Name: Die
   m_TagString: Untagged
@@ -263,11 +264,14 @@ MonoBehaviour:
   angularForce:
     min: 3
     max: 12
-  up: 12
-  forward: 3
+  throwForce:
+    min: 0
+    max: 0
   stillCheckDelay: 10
   maxLandedPower: 0
   sideChecker: {fileID: 1615791137981446642}
+  dieVisual: {fileID: 0}
+  action: {fileID: 0}
 --- !u!54 &1615791138153388886
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -284,6 +288,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4590370241812254209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615791138153388887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f5a7dd982590674d9fffce1261e6e8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1615791138407379058
 GameObject:
   m_ObjectHideFlags: 0

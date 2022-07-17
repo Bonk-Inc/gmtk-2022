@@ -14,6 +14,10 @@ public class DiceManager : MonoBehaviour
     [SerializeField]
     private DiceSpot[] spots;
 
+    [SerializeField]
+    private DiceAudioPlayer player;
+
+
     public List<ActionDie> Dice => dice;
 
     public void PlayDiceActionSequence(){
@@ -39,6 +43,7 @@ public class DiceManager : MonoBehaviour
         {
             diceThrows[i] = StartCoroutine(dice[i].Throw(cam.transform.forward, cam.transform.position -cam.transform.forward*3 + (Vector3)Random.insideUnitCircle*15));
         }
+        player.StartRound();
         yield return StartCoroutine(CoroutineHelper.WaitForAll(diceThrows));
     }
 
@@ -50,6 +55,7 @@ public class DiceManager : MonoBehaviour
         {
             diceThrows[i] = StartCoroutine(dice[i].Throw(cam.transform.forward, cam.transform.position -cam.transform.forward*3 + (Vector3)Random.insideUnitCircle*15));
         }
+        player.StartRound();
         yield return StartCoroutine(CoroutineHelper.WaitForAll(diceThrows));
     }
 
