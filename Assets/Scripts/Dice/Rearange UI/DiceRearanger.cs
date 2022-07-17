@@ -28,6 +28,9 @@ public class DiceRearanger : MonoBehaviour
     private Coroutine rearangeUpdater;
     private bool isRearanging = false;
 
+    [SerializeField]
+    private PlaySound rearrangeSound;
+
     public event Action OnRearrangeFinished;
 
     public void StartRearrange()
@@ -112,6 +115,7 @@ public class DiceRearanger : MonoBehaviour
             {
                 spots[currentEmpty].SetDie(draggingDie);
                 draggingDie = null;
+                rearrangeSound.PlayClip();
             }
             yield return null;
         }
