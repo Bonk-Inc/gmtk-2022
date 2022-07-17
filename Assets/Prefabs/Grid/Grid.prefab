@@ -37,7 +37,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3343115849087071961
 MeshFilter:
@@ -592,6 +592,17 @@ MonoBehaviour:
   wallCornerPrefab: {fileID: 4215364404235133139, guid: b2a3ff0c861eb8044be3a00597fb85a8, type: 3}
   wallNoSupportPrefab: {fileID: 4215364404235133139, guid: 06d9d258f81a6f34fa5648713bd6a84b, type: 3}
   wallNoSupportCornerPrefab: {fileID: 4215364404235133139, guid: 0355021891a22c542bd8cec3b020e97c, type: 3}
+  standingLampPrefab: {fileID: 4215364404235133139, guid: 1923e7b4bf932f0788405e2213dbba23, type: 3}
+  shortLampPrefab: {fileID: 4215364404235133139, guid: 47fe984eeb1c7d0d48be333907a80a97, type: 3}
+  armChairPrefab: {fileID: 0}
+  bigSofaPrefab: {fileID: 0}
+  bookshelfPrefab: {fileID: 0}
+  bookPilePrefab: {fileID: 0}
+  carpetPrefab: {fileID: 4215364404235133139, guid: 87522a535f05d49d7a5179f6d896a636, type: 3}
+  tvPrefab: {fileID: 4215364404235133139, guid: 5316202aab156b240a204d2c83d1c881, type: 3}
+  tablePrefab: {fileID: 0}
+  longTablePrefab: {fileID: 0}
+  lampTablePrefab: {fileID: 4215364404235133139, guid: 10eb85cfb721244f4bea76dfd49cc6aa, type: 3}
   goalPrefab: {fileID: 8985895600756820289, guid: e4cb4229ad1fe1743aa62f0b97001332, type: 3}
 --- !u!114 &1414946923
 MonoBehaviour:
