@@ -13,6 +13,9 @@ public class GridManager : MonoBehaviour
     private bool generateGrid = false;
     [SerializeField]
     private bool createFromLevel = false;
+
+    [SerializeField]
+    private string path = "Levels";
     [SerializeField]
     private string level = "level-1";
 
@@ -27,7 +30,7 @@ public class GridManager : MonoBehaviour
     {
         if (createFromLevel)
         {
-            grid = creator.LoadLevel(level);
+            grid = creator.LoadLevel(path, level);
             return;
         }
 

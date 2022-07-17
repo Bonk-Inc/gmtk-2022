@@ -5,42 +5,78 @@ using UnityEngine;
 public class LevelCreator : MonoBehaviour
 {
     // TODO Split script up in multiple scripts
-
-
-    [SerializeField, Header("Dependencies")]
     private CSVReader reader;
 
-    [SerializeField]
+    [SerializeField, Header("Dependencies")]
     private GridGenerator generator;
+    [SerializeField]
+    private LevelInformation information;
     [SerializeField, Header("Settings - Most to be moved to different scripts.")]
     private StartPosition startPosition;
 
     [SerializeField]
-    private GameObject wallPrefab;
+    private GameObject wallPrefab, wallCornerPrefab, wallNoSupportPrefab, wallNoSupportCornerPrefab;
 
     [SerializeField]
     private GameObject goalPrefab;
 
-    public GridRow[] LoadLevel(string level)
+    private LevelCreator()
+    {
+        reader = new CSVReader();
+    }
+
+    public GridRow[] LoadLevel(string path, string level)
     {
         // Step 1: Get Data
-        var data = reader.ReadFile(level);
+        var data = reader.ReadFile(path, level);
         if (data.Length == 0) return generator.CreateGrid();
 
-        // Step 2: Instantiate Grid with correct size
-        var grid = generator.CreateGrid(data.Length, data[0].Length);
+        // Step 2: Create Level Information
+        var levelInfo = data[0][0].Split(";");
+        if (levelInfo.Length != 4)
+        {
+            Debug.LogError("Level Information not set!");
+            return generator.CreateGrid();
+        }
+        else
+        {
+            SetLevelInformation(levelInfo);
+        }
 
-        // Step 3: Read and use Data
+        // Step 3: Instantiate Grid with correct size
+        var grid = generator.CreateGrid(data.Length -1, data[1].Length);
+
+        // Step 4: Read and use Data
+        
         SetLevelData(data, grid);
 
         return grid;
     }
 
+    private void SetLevelInformation(string[] levelInformation)
+    {
+        var levelTitle = levelInformation[0];
+        var levelDescription = levelInformation[1];
+
+        information.SetInformation(levelTitle, levelDescription);
+        int.TryParse(levelInformation[2], out int gameModeInt);
+
+        var settings = levelInformation[3].Split('_');
+        settings[^1].Trim();
+        
+        var gamemode = ((LevelGamemodeTypes)gameModeInt) switch
+        {
+             _ => new ReachTheGoalGamemode(settings[0], settings[1], settings[2]),
+        };
+
+        information.GameMode = gamemode;
+    }
+
     private void SetLevelData(string[][] data, GridRow[] grid)
     {
-        for (int i = 0; i < grid.Length; i++)
+        for (int i = 1; i < data.Length; i++)
         {
-            var row = grid[i];
+            var row = grid[i-1];
             for (int j = 0; j < row.Tiles.Length; j++)
             {
                 var tileData = data[i][j];
@@ -118,9 +154,19 @@ public class LevelCreator : MonoBehaviour
     {
         var settings = setting.Split("-");
         tile.Blocked = true;
-        var wall = Instantiate(wallPrefab, tile.transform);
-        wall.transform.position = new Vector3(wall.transform.position.x, 1, wall.transform.position.z);
-        // TODO setting[0] Decides on wall model.
+
+        settings[0] = settings[0].Trim();
+        var prefab = settings[0] switch
+        {
+            "1" => wallPrefab,
+            "2" => wallCornerPrefab,
+            "3" => wallNoSupportPrefab,
+            _ => wallNoSupportCornerPrefab
+        };
+        var wall = Instantiate(prefab, tile.transform);
+        wall.transform.localPosition = Vector3.zero;
+
+
         settings[1] = settings[1].Trim();
         var rotation = settings[1] switch
         {
@@ -130,7 +176,7 @@ public class LevelCreator : MonoBehaviour
             _ => 0f,
         };
 
-        Vector3 rotationVector = new Vector3(-90, -rotation, 0);
+        Vector3 rotationVector = new Vector3(0, -rotation, 0);
         wall.transform.rotation = Quaternion.Euler(rotationVector);
     }
 
