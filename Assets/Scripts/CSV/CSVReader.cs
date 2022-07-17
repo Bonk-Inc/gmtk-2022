@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class CSVReader : MonoBehaviour
+public class CSVReader
 {
-    [SerializeField]
-    private string path = "Levels"; // TODO Should this be here, or as a parameter?
-
-    public string[][] ReadFile(string fileName)
+    public string[][] ReadFile(string path = "Levels", string fileName = "level")
     {
-        var data = LoadResource(fileName);
+        var data = LoadResource(path, fileName);
         return ReadData(data.text);
     }
 
@@ -27,7 +24,7 @@ public class CSVReader : MonoBehaviour
         return result;
     }
 
-    private TextAsset LoadResource(string fileName)
+    private TextAsset LoadResource(string path, string fileName)
     {
         return Resources.Load<TextAsset>(path + "/" + fileName);
     }

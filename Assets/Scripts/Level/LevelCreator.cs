@@ -5,12 +5,9 @@ using UnityEngine;
 public class LevelCreator : MonoBehaviour
 {
     // TODO Split script up in multiple scripts
-
-
-    [SerializeField, Header("Dependencies")]
     private CSVReader reader;
 
-    [SerializeField]
+    [SerializeField, Header("Dependencies")]
     private GridGenerator generator;
     [SerializeField]
     private LevelInformation information;
@@ -18,15 +15,20 @@ public class LevelCreator : MonoBehaviour
     private StartPosition startPosition;
 
     [SerializeField]
-    private GameObject wallPrefab;
+    private GameObject wallPrefab, wallCornerPrefab, wallNoSupportPrefab, wallNoSupportCornerPrefab;
 
     [SerializeField]
     private GameObject goalPrefab;
 
-    public GridRow[] LoadLevel(string level)
+    private LevelCreator()
+    {
+        reader = new CSVReader();
+    }
+
+    public GridRow[] LoadLevel(string path, string level)
     {
         // Step 1: Get Data
-        var data = reader.ReadFile(level);
+        var data = reader.ReadFile(path, level);
         if (data.Length == 0) return generator.CreateGrid();
 
         // Step 2: Create Level Information
@@ -152,9 +154,19 @@ public class LevelCreator : MonoBehaviour
     {
         var settings = setting.Split("-");
         tile.Blocked = true;
-        var wall = Instantiate(wallPrefab, tile.transform);
-        wall.transform.position = new Vector3(wall.transform.position.x, 1, wall.transform.position.z);
-        // TODO setting[0] Decides on wall model.
+
+        settings[0] = settings[0].Trim();
+        var prefab = settings[0] switch
+        {
+            "1" => wallPrefab,
+            "2" => wallCornerPrefab,
+            "3" => wallNoSupportPrefab,
+            _ => wallNoSupportCornerPrefab
+        };
+        var wall = Instantiate(prefab, tile.transform);
+        wall.transform.localPosition = Vector3.zero;
+
+
         settings[1] = settings[1].Trim();
         var rotation = settings[1] switch
         {
@@ -164,7 +176,7 @@ public class LevelCreator : MonoBehaviour
             _ => 0f,
         };
 
-        Vector3 rotationVector = new Vector3(-90, -rotation, 0);
+        Vector3 rotationVector = new Vector3(0, -rotation, 0);
         wall.transform.rotation = Quaternion.Euler(rotationVector);
     }
 
