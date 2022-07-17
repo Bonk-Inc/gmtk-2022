@@ -85,6 +85,9 @@ public class LevelCreator : MonoBehaviour
             case "WALL":
                 SetWall(tile, setting[1]);
                 break;
+            case "GOAL":
+                SetGoal(tile, setting[1]);
+                break;
             default:
                 break;
         }
@@ -109,6 +112,26 @@ public class LevelCreator : MonoBehaviour
     }
 
     private void SetWall(GridTile tile, string setting)
+    {
+        var settings = setting.Split("-");
+        tile.Blocked = true;
+        var wall = Instantiate(wallPrefab, tile.transform);
+        wall.transform.position = new Vector3(wall.transform.position.x, 1, wall.transform.position.z);
+        // TODO setting[0] Decides on wall model.
+        settings[1] = settings[1].Trim();
+        var rotation = settings[1] switch
+        {
+            "N" => -90f,
+            "S" => 90f,
+            "E" => 180f,
+            _ => 0f,
+        };
+
+        Vector3 rotationVector = new Vector3(-90, -rotation, 0);
+        wall.transform.rotation = Quaternion.Euler(rotationVector);
+    }
+
+    private void SetGoal(GridTile tile, string setting)
     {
         var settings = setting.Split("-");
         tile.Blocked = true;
