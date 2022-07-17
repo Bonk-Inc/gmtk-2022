@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1414946921}
   - component: {fileID: 1414946922}
   - component: {fileID: 1414946923}
+  - component: {fileID: 7530281137882699431}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -2687,6 +2688,9 @@ MonoBehaviour:
     - {fileID: 0}
     - {fileID: 0}
     - {fileID: 0}
+  OnTileCreated:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1414946921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2714,8 +2718,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reader: {fileID: 1414946921}
   generator: {fileID: 3343115849087071943}
+  information: {fileID: 0}
   startPosition: {fileID: 1414946923}
   wallPrefab: {fileID: 7599753109123615977, guid: c8eb6ce59bce8544e8824b358c3afffa, type: 3}
+  goalPrefab: {fileID: 0}
 --- !u!114 &1414946923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2731,3 +2737,17 @@ MonoBehaviour:
   manager: {fileID: 751401336384119923}
   position: {x: 2, y: 2}
   moveDirection: 0
+--- !u!114 &7530281137882699431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3343115849087071965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b41eddc33727e843af1b773ef6b3b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: 
+  description: 
