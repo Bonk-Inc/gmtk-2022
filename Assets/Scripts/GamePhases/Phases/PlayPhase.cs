@@ -23,6 +23,6 @@ public class PlayPhase : GamePhase
         yield return StartCoroutine(dice.PlayDiceActions());
         dice.Clear();
         sound.Stop();
-        statemachine.SetState(GamePhaseType.THROW);//TODO might change to npc turn later
+        statemachine.SetState(GamePhaseType.STARTROUND);//TODO might change to npc turn later
     }
 }
