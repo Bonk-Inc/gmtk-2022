@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 229565941}
   - component: {fileID: 229565940}
   - component: {fileID: 229565939}
+  - component: {fileID: 8599708262458050230}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -65,8 +66,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grid: {fileID: 0}
   movementTime: 0.5
+  rotationTime: 0.5
   currentPosition: {fileID: 0}
   movementDirection: 0
+  stepHeight: 1
 --- !u!114 &229565941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,8 +82,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d1c7e20a5b6bb4a9e1e90afd123ab3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {fileID: 832958988518818057}
-  movementClip: {fileID: 229565940}
   damageClip: {fileID: 229565939}
 --- !u!114 &229565940
 MonoBehaviour:
@@ -113,6 +114,20 @@ MonoBehaviour:
   clips:
   - {fileID: 8300000, guid: 306641647dae73e4089a8e603fdf51c4, type: 3}
   - {fileID: 8300000, guid: a8760b0b2d1b07a4f9ca8713b185354c, type: 3}
+--- !u!114 &8599708262458050230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832958988518818066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 112fefc125995db4883d24c803333525, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movement: {fileID: 832958988518818057}
+  phaseManager: {fileID: 0}
 --- !u!1001 &6732016004657772045
 PrefabInstance:
   m_ObjectHideFlags: 0

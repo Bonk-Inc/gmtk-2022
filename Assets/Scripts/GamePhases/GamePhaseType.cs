@@ -14,4 +14,6 @@ public enum GamePhaseType
 
     PLAY,
 
+    FINISHED
+
 }
