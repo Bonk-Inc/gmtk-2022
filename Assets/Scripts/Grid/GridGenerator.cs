@@ -50,9 +50,9 @@ public class GridGenerator : MonoBehaviour
                 CreateTile(i, j);
             }
         }
-
-        if (Application.isPlaying) EditorUtility.SetDirty(gameObject);
-
+#if UNITY_EDITOR
+        if (!Application.isPlaying) EditorUtility.SetDirty(gameObject);
+#endif
         print("Grid Created.");
         return rows;
     }

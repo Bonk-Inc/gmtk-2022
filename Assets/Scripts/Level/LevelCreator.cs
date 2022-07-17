@@ -92,12 +92,13 @@ public class LevelCreator : MonoBehaviour
 
     private void SetPlayer(GridTile tile, string setting)
     {
+        startPosition.SetPosition(tile.Position, true);
         var settings = setting.Split("-");
 
         // TODO setting[0] Decides on player model.
-        startPosition.SetPosition(tile.Position, true);
-        
+
         // TODO Do we want NWSE or rather have it numbered?
+        settings[1] = settings[1].Trim();
         startPosition.MoveDirection = settings[1] switch
         {
             "W" => Direction.West,
@@ -114,7 +115,7 @@ public class LevelCreator : MonoBehaviour
         var wall = Instantiate(wallPrefab, tile.transform);
         wall.transform.position = new Vector3(wall.transform.position.x, 1, wall.transform.position.z);
         // TODO setting[0] Decides on wall model.
-        
+        settings[1] = settings[1].Trim();
         var rotation = settings[1] switch
         {
             "N" => -90f,
