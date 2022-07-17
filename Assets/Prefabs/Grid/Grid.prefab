@@ -594,14 +594,14 @@ MonoBehaviour:
   wallNoSupportCornerPrefab: {fileID: 4215364404235133139, guid: 0355021891a22c542bd8cec3b020e97c, type: 3}
   standingLampPrefab: {fileID: 4215364404235133139, guid: 1923e7b4bf932f0788405e2213dbba23, type: 3}
   shortLampPrefab: {fileID: 4215364404235133139, guid: 47fe984eeb1c7d0d48be333907a80a97, type: 3}
-  armChairPrefab: {fileID: 0}
-  bigSofaPrefab: {fileID: 0}
-  bookshelfPrefab: {fileID: 0}
-  bookPilePrefab: {fileID: 0}
+  armChairPrefab: {fileID: 4215364404235133139, guid: 4a74b59d63c6ce8e89f33651a778f3ad, type: 3}
+  bigSofaPrefab: {fileID: 4215364404235133139, guid: 690a06ccf9079a1b58bda9ccc833d04f, type: 3}
+  bookshelfPrefab: {fileID: 4215364404235133139, guid: 9c7b387c878e03ffb849b4fd7e2adcad, type: 3}
+  bookPilePrefab: {fileID: 4215364404235133139, guid: 74a53f391a5f7e04e88f305e6b6a5d20, type: 3}
   carpetPrefab: {fileID: 4215364404235133139, guid: 87522a535f05d49d7a5179f6d896a636, type: 3}
   tvPrefab: {fileID: 4215364404235133139, guid: 5316202aab156b240a204d2c83d1c881, type: 3}
-  tablePrefab: {fileID: 0}
-  longTablePrefab: {fileID: 0}
+  tablePrefab: {fileID: 4215364404235133139, guid: 318ff800717dac0fb80e0edc3a0c9ca2, type: 3}
+  longTablePrefab: {fileID: 4215364404235133139, guid: 75547f8fef68ef038b3eb0ba3172be7d, type: 3}
   lampTablePrefab: {fileID: 4215364404235133139, guid: 10eb85cfb721244f4bea76dfd49cc6aa, type: 3}
   goalPrefab: {fileID: 8985895600756820289, guid: e4cb4229ad1fe1743aa62f0b97001332, type: 3}
 --- !u!114 &1414946923
