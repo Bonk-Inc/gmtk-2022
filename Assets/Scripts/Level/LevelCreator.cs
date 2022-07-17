@@ -96,6 +96,7 @@ public class LevelCreator : MonoBehaviour
 
     private void SetTileData(string data, GridTile tile, GridRow row)
     {
+        data = data.Trim();
         if (data.Equals("NONE"))
         {
             SetGhostTile(tile);
@@ -211,6 +212,7 @@ public class LevelCreator : MonoBehaviour
             "TABLE2" => longTablePrefab,
             _ => lampTablePrefab
         };
+        if (prefab.Equals(longTablePrefab)) print("HENKIE");
         var prop = Instantiate(prefab, tile.transform);
         prop.transform.localPosition = Vector3.zero;
 
