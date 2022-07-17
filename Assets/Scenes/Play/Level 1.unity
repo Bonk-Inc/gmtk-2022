@@ -144,6 +144,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1458038228}
     - target: {fileID: 1228732918, guid: 639add2a667f9d842bdac92f134e3765, type: 3}
+      propertyPath: rethrowSound
+      value: 
+      objectReference: {fileID: 1291791979}
+    - target: {fileID: 1228732918, guid: 639add2a667f9d842bdac92f134e3765, type: 3}
       propertyPath: rethrowButton
       value: 
       objectReference: {fileID: 675909894}
@@ -34942,6 +34946,26 @@ MonoBehaviour:
   visual: {fileID: 1291191123}
   position: {x: 19, y: 7}
   blocked: 0
+--- !u!1 &1291791977 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1228732916, guid: 639add2a667f9d842bdac92f134e3765, type: 3}
+  m_PrefabInstance: {fileID: 5330141}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1291791979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291791977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f80b7166bfcf1b54b8a524ef6013b3c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 602096432}
+  clips:
+  - {fileID: 8300000, guid: c07f85dd5db7e994da586b8735b548fb, type: 3}
 --- !u!1 &1297094350
 GameObject:
   m_ObjectHideFlags: 0

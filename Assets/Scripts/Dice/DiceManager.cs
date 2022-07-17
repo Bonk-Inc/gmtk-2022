@@ -37,6 +37,9 @@ public class DiceManager : MonoBehaviour
 
     public IEnumerator ThrowAll(){
 
+        if(dice.Count == 0)
+         yield break;
+
         var diceThrows = new Coroutine[dice.Count];
 
         for (int i = 0; i < dice.Count; i++)
@@ -48,6 +51,9 @@ public class DiceManager : MonoBehaviour
     }
 
     public IEnumerator Throw(ActionDie[] dice){
+
+        if(dice.Length == 0)
+         yield break;
 
         var diceThrows = new Coroutine[dice.Length];
 

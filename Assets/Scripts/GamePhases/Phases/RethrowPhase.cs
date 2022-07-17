@@ -19,6 +19,9 @@ public class RethrowPhase : GamePhase
     [SerializeField]
     private HorizontalLayoutGroup visualContainer;
 
+    [SerializeField]
+    private PlaySound rethrowSound;
+
     private GamePhaseStateMachine statemachine;
 
     public override void EnterPhase(GamePhaseStateMachine statemachine)
@@ -51,6 +54,11 @@ public class RethrowPhase : GamePhase
 
     private IEnumerator ThrowSelectedDice(){
         var selected = selector.GetSelectedDice();
+
+        if(selected.Length > 0){
+            rethrowSound.PlayClip();
+        }
+
         var physicalDice = selected.Select((selection) => selection.dice.physicalDie).ToArray();
         var actionDice = selected.Select((selection) => selection.dice.physicalDie.ActionDie).ToArray();
         selector.StopSelecting();
