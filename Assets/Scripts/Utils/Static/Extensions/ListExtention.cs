@@ -13,6 +13,14 @@ public static class ListExtention
         var randomIndex = Random.Range(0, list.Count);
         return list[randomIndex];
     }
+
+        public static int GetRandomIndex<T>(this List<T> list)
+    {
+        if(list.Count == 0) 
+            throw new System.Exception("Cannot get random element from empty list");
+        
+        return Random.Range(0, list.Count);
+    }
     
     public static bool UnorderedEqual<T>(this ICollection<T> a, ICollection<T> b)
     {
