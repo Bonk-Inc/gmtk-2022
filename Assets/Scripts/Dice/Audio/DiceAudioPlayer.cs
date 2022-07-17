@@ -24,7 +24,6 @@ public class DiceAudioPlayer : MonoBehaviour
     }
 
     private void PlayAudio(){
-        Debug.Log(firstOfRound);
         if(firstOfRound){
             player.PlayClip();
             firstOfRound = false;
