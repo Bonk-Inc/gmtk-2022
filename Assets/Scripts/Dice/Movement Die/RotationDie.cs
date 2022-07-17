@@ -10,7 +10,6 @@ public class RotationDie : ActionDie
 
     public override IEnumerator PlayAction()
     {
-        movement.Rotate((Direction)Thrower.LastThrow);
-        yield return null;
+        yield return movement.Rotate((Direction)Thrower.LastThrow);
     }
 }

@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private GridManager grid;
 
     [SerializeField, Header("Movement Settings")]
-    private float movementTime = 0.5f;
+    private float movementTime = 0.5f, rotationTime = 0.5f;
 
     [SerializeField, Header("Game Information - Read Only!")]
     private GridTile currentPosition;
@@ -22,15 +22,9 @@ public class PlayerMovement : MonoBehaviour
 
     public event Action OnMovementStart, OnMovementFinish, OnBonked;
 
-    private void Awake()
-    {
-        Rotate(Direction.North);
-    }
-
     public void SetInstantLocation(Vector2Int position)
     {
-        Coroutine c;
-        ChangeTile(position, out c);
+        ChangeTileInstant(position);
     }
 
     public Coroutine Move(int steps)
@@ -38,10 +32,33 @@ public class PlayerMovement : MonoBehaviour
         return StartCoroutine(MoveSteps(steps));
     }
 
-    public void Rotate(Direction direction)
+    public void RotateInstant(Direction direction)
     {
         movementDirection = direction;
-        // TODO Show player rotating visually
+        transform.forward = GetDirection();
+    }
+
+    public Coroutine Rotate(Direction direction)
+    {
+        var prevDirection = GetMovement();
+        movementDirection = direction;
+        var directionMove = GetMovement();
+        return StartCoroutine(RotateAnimation((Vector2)directionMove, (Vector2)prevDirection));
+    }
+
+    private IEnumerator RotateAnimation(Vector2 end, Vector2 start)
+    {
+        var angle =  Vector2.SignedAngle(end, start);
+        var initialAngle = transform.rotation.eulerAngles.y;
+        var t = 0f;
+        while(t < 1){
+            var rotation = transform.rotation.eulerAngles;
+            rotation.y = initialAngle + Mathf.Lerp(0, angle, t);
+            transform.rotation = Quaternion.Euler(rotation);
+            t += Time.deltaTime / rotationTime;
+            yield return null;
+        }
+        RotateInstant(movementDirection);
     }
 
     private IEnumerator MoveSteps(int steps)
@@ -72,6 +89,18 @@ public class PlayerMovement : MonoBehaviour
         };
     }
 
+    private Vector3 GetDirection()
+    {
+        return movementDirection switch
+        {
+            Direction.North => Vector3.forward,
+            Direction.East => Vector3.right,
+            Direction.South => Vector3.back,
+            Direction.West => Vector3.left,
+            _ => Vector3.forward,
+        };
+    }
+
     private bool ChangeTile(Vector2Int position, out Coroutine moveAnimation)
     {
         var tile = grid.GetTileByPosition(position);
@@ -95,7 +124,31 @@ public class PlayerMovement : MonoBehaviour
         currentPosition = tile;
         return true;
     }
-    
+
+
+    private bool ChangeTileInstant(Vector2Int position)
+    {
+        var tile = grid.GetTileByPosition(position);
+        if (tile != null) return ChangeTileInstant(tile);
+
+        return false;
+    }
+
+    private bool ChangeTileInstant(GridTile tile)
+    {
+        if (tile.Blocked)
+        {
+            OnBonked?.Invoke();
+            return false;
+        }
+        if (currentPosition != null) currentPosition.Blocked = false;
+
+        transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y + tile.transform.localScale.y, tile.transform.position.z);
+        tile.Blocked = true;
+        currentPosition = tile;
+        return true;
+    }
+
 
 
     private IEnumerator MoveAnimation(Vector3 startPoint, Vector3 endPoint)
