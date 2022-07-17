@@ -17,15 +17,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private Direction movementDirection = Direction.North;
 
+    [SerializeField]
+    private float stepHeight = 1;
+
     public event Action OnMovementStart, OnMovementFinish, OnBonked;
 
-    private void Awake() {
+    private void Awake()
+    {
         Rotate(Direction.North);
     }
 
     public void SetInstantLocation(Vector2Int position)
     {
-        ChangeTile(position);
+        Coroutine c;
+        ChangeTile(position, out c);
     }
 
     public Coroutine Move(int steps)
@@ -44,11 +49,12 @@ public class PlayerMovement : MonoBehaviour
         OnMovementStart?.Invoke();
 
         Vector2Int nextPosition = currentPosition.Position + GetMovement();
-        while (steps > 0 && ChangeTile(nextPosition))
+        Coroutine animation;
+        while (steps > 0 && ChangeTile(nextPosition, out animation))
         {
             nextPosition = currentPosition.Position + GetMovement();
             steps--;
-            yield return new WaitForSeconds(movementTime);
+            yield return animation;
         }
         OnMovementFinish?.Invoke();
     }
@@ -66,15 +72,17 @@ public class PlayerMovement : MonoBehaviour
         };
     }
 
-    private bool ChangeTile(Vector2Int position)
+    private bool ChangeTile(Vector2Int position, out Coroutine moveAnimation)
     {
         var tile = grid.GetTileByPosition(position);
-        if(tile != null) return ChangeTile(tile);
+        if (tile != null) return ChangeTile(tile, out moveAnimation);
+        moveAnimation = null;
         return false;
     }
 
-    private bool ChangeTile(GridTile tile)
+    private bool ChangeTile(GridTile tile, out Coroutine moveAnimation)
     {
+        moveAnimation = null;
         if (tile.Blocked)
         {
             OnBonked?.Invoke();
@@ -82,9 +90,68 @@ public class PlayerMovement : MonoBehaviour
         }
         if (currentPosition != null) currentPosition.Blocked = false;
 
-        transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y + tile.transform.localScale.y, tile.transform.position.z);
+        moveAnimation = StartCoroutine(MoveAnimation(transform.position, new Vector3(tile.transform.position.x, tile.transform.position.y + tile.transform.localScale.y, tile.transform.position.z)));
         tile.Blocked = true;
         currentPosition = tile;
         return true;
+    }
+    
+
+
+    private IEnumerator MoveAnimation(Vector3 startPoint, Vector3 endPoint)
+    {
+        float t = 0;
+        float cdStart = startPoint.x;
+        float csEnd = endPoint.x;
+        if (Math.Abs(startPoint.x - endPoint.x) > Math.Abs(startPoint.z - endPoint.z))
+        {
+            cdStart = startPoint.x;
+            csEnd = endPoint.x;
+
+        }
+        else
+        {
+            cdStart = startPoint.z;
+            csEnd = endPoint.z;
+
+        }
+
+        Vector2 p0 = new Vector2(Mathf.Lerp(cdStart, csEnd, 0), startPoint.y);
+        Vector2 p1 = new Vector2(Mathf.Lerp(cdStart, csEnd, 0.33f), startPoint.y + stepHeight);
+        Vector2 p2 = new Vector2(Mathf.Lerp(cdStart, csEnd, 0.66f), endPoint.y + stepHeight);
+        Vector2 p3 = new Vector2(Mathf.Lerp(cdStart, csEnd, 1), endPoint.y);
+        while (t < 1)
+        {
+            var point = GetBrezierPoint(t, p0, p1, p2, p3);
+            if (Math.Abs(startPoint.x - endPoint.x) > Math.Abs(startPoint.z - endPoint.z))
+            {
+                transform.position = new Vector3(point.x, point.y, transform.position.z);
+            }
+            else
+            {
+                transform.position = new Vector3(transform.position.x, point.y, point.x);
+            }
+            t += Time.deltaTime / movementTime;
+            yield return null;
+        }
+
+        transform.position = endPoint;
+    }
+
+    private Vector2 GetBrezierPoint(float t, Vector2 p0, Vector2 p1, Vector2 p2, Vector2 p3)
+    {
+        float cx = 3 * (p1.x - p0.x);
+        float cy = 3 * (p1.y - p0.y);
+        float bx = 3 * (p2.x - p1.x) - cx;
+        float by = 3 * (p2.y - p1.y) - cy;
+        float ax = p3.x - p0.x - cx - bx;
+        float ay = p3.y - p0.y - cy - by;
+        float Cube = t * t * t;
+        float Square = t * t;
+
+        float resX = (ax * Cube) + (bx * Square) + (cx * t) + p0.x;
+        float resY = (ay * Cube) + (by * Square) + (cy * t) + p0.y;
+
+        return new Vector2(resX, resY);
     }
 }
