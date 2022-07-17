@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4236432800641745798}
   - component: {fileID: 7553565370221551441}
   - component: {fileID: -8430238339402026837}
+  - component: {fileID: 5237075081386996755}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Untagged
@@ -97,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4b9174ea4d796747bbcf6e7d77d5c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  visual: {fileID: 5237075081386996755}
   position: {x: 0, y: 0}
   blocked: 0
 --- !u!65 &-8430238339402026837
@@ -112,3 +114,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5237075081386996755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4236432800641745787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5efc9e241db07cc42998b4e5f41c1d5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 4236432800641745798}

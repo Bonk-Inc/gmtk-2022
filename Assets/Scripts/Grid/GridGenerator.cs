@@ -25,28 +25,34 @@ public class GridGenerator : MonoBehaviour
 
     public GridRow[] Rows { get => rows; }
 
-
     [ExecuteInEditMode, ContextMenu("Create Grid")]
     public GridRow[] CreateGrid()
+    {
+        return CreateGrid(x, z);
+    }
+
+    public GridRow[] CreateGrid(int xSize, int zSize)
     {
         if (transform.childCount == 0) CreateHolder();
         if (tileHolder == null || tileHolder.childCount > 0) ResetGrid();
 
-        rows = new GridRow[x];
+        rows = new GridRow[xSize];
 
-        for (int i = 0; i < x; i++)
+        for (int i = 0; i < xSize; i++)
         {
-            rows[i] = new GridRow();
-            rows[i].Tiles = new GridTile[z];
+            rows[i] = new GridRow
+            {
+                Tiles = new GridTile[zSize]
+            };
 
-            for (int j = 0; j < z; j++)
-            { 
+            for (int j = 0; j < zSize; j++)
+            {
                 CreateTile(i, j);
             }
         }
 
         if (Application.isPlaying) EditorUtility.SetDirty(gameObject);
-        
+
         print("Grid Created.");
         return rows;
     }

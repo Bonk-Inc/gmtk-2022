@@ -11,6 +11,7 @@ public class MovementDie : ActionDie
 
     public override IEnumerator PlayAction()
     {
+        // TODO What happens when the coroutine from movement.Move gets cancelled?
         yield return movement.Move(Thrower.LastThrow);
     }
 

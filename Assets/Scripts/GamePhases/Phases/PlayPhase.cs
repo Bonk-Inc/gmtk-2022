@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayPhase : GamePhase
 {
     [SerializeField]
-    private PlaySound sound;
+    private AudioSource sound;
     [SerializeField]
     private DiceManager dice;
 
@@ -19,9 +19,10 @@ public class PlayPhase : GamePhase
     public override void UpdateState(GamePhaseStateMachine statemachine){}
 
     private IEnumerator PlayActions(GamePhaseStateMachine statemachine){
-        sound.PlayClip();
+        sound.Play();
         yield return StartCoroutine(dice.PlayDiceActions());
         dice.Clear();
+        sound.Stop();
         statemachine.SetState(GamePhaseType.THROW);//TODO might change to npc turn later
     }
 }
