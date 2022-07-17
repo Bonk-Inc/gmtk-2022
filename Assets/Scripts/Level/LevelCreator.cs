@@ -12,6 +12,8 @@ public class LevelCreator : MonoBehaviour
 
     [SerializeField]
     private GridGenerator generator;
+    [SerializeField]
+    private LevelInformation information;
     [SerializeField, Header("Settings - Most to be moved to different scripts.")]
     private StartPosition startPosition;
 
@@ -27,20 +29,52 @@ public class LevelCreator : MonoBehaviour
         var data = reader.ReadFile(level);
         if (data.Length == 0) return generator.CreateGrid();
 
-        // Step 2: Instantiate Grid with correct size
-        var grid = generator.CreateGrid(data.Length, data[0].Length);
+        // Step 2: Create Level Information
+        var levelInfo = data[0][0].Split(";");
+        if (levelInfo.Length != 4)
+        {
+            Debug.LogError("Level Information not set!");
+            return generator.CreateGrid();
+        }
+        else
+        {
+            SetLevelInformation(levelInfo);
+        }
 
-        // Step 3: Read and use Data
+        // Step 3: Instantiate Grid with correct size
+        var grid = generator.CreateGrid(data.Length -1, data[1].Length);
+
+        // Step 4: Read and use Data
+        
         SetLevelData(data, grid);
 
         return grid;
     }
 
+    private void SetLevelInformation(string[] levelInformation)
+    {
+        var levelTitle = levelInformation[0];
+        var levelDescription = levelInformation[1];
+
+        information.SetInformation(levelTitle, levelDescription);
+        int.TryParse(levelInformation[2], out int gameModeInt);
+
+        var settings = levelInformation[3].Split('_');
+        settings[^1].Trim();
+        
+        var gamemode = ((LevelGamemodeTypes)gameModeInt) switch
+        {
+             _ => new ReachTheGoalGamemode(settings[0], settings[1], settings[2]),
+        };
+
+        information.GameMode = gamemode;
+    }
+
     private void SetLevelData(string[][] data, GridRow[] grid)
     {
-        for (int i = 0; i < grid.Length; i++)
+        for (int i = 1; i < data.Length; i++)
         {
-            var row = grid[i];
+            var row = grid[i-1];
             for (int j = 0; j < row.Tiles.Length; j++)
             {
                 var tileData = data[i][j];
