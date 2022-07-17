@@ -252,6 +252,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrower: {fileID: 439890795655633813}
+  movement: {fileID: 0}
+--- !u!114 &8586155704428437436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439890795655633811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c89090d26b434764eac0a5da050cbef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  throwHandler: {fileID: 439890795655633813}
+  criticalNumber: 6
+  soundPlayer: {fileID: 9179020127578936769}
+--- !u!114 &9179020127578936769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439890795655633811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f80b7166bfcf1b54b8a524ef6013b3c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 0}
+  clips:
+  - {fileID: 8300000, guid: e8e328bcbe59691408a687c0b24f8a65, type: 3}
+  - {fileID: 8300000, guid: e1523f7503665f24691d3afd569a6743, type: 3}
 --- !u!114 &439890795655633813 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1615791138153388881, guid: 201dc93666cda5c4d9861f6947117e1f, type: 3}

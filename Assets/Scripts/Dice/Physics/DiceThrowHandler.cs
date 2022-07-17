@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,8 @@ public class DiceThrowHandler : MonoBehaviour
 
     public int LastThrow { get; private set; } = 0;
 
+    public event Action<int> OnLand;
+
     [ContextMenu("Throw")]
     public Coroutine Throw(Vector3 dir, Vector3 start)
     {
@@ -38,7 +41,7 @@ public class DiceThrowHandler : MonoBehaviour
 
         rb.position = start;
         rb.velocity = dir.normalized * throwForce.RandomInRange();
-        rb.angularVelocity = Random.insideUnitSphere * angularForce.RandomInRange();
+        rb.angularVelocity = UnityEngine.Random.insideUnitSphere * angularForce.RandomInRange();
         return StartCoroutine(DetectLanded());
     }
 
@@ -67,6 +70,7 @@ public class DiceThrowHandler : MonoBehaviour
             yield return null;
         }
         LastThrow = sideChecker.GetCurrentSide().Value;
+        OnLand?.Invoke(LastThrow);
     }
 
     public DieVisual GetRotatedVisual()
