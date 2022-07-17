@@ -4544,9 +4544,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1656576418}
+  - {fileID: 1897897702}
+  - {fileID: 858998133}
 --- !u!114 &1598159573
 MonoBehaviour:
   m_ObjectHideFlags: 0
