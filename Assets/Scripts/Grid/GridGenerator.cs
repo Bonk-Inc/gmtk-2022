@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.Events;
+
+[System.Serializable]
+public class TileCreated: UnityEvent<GridTile>{}
 
 [System.Serializable]
 public class GridGenerator : MonoBehaviour
@@ -20,6 +24,10 @@ public class GridGenerator : MonoBehaviour
 
     [SerializeField, Header("Grid Tiles")]
     private GridRow[] rows;
+    
+    [SerializeField]
+    public TileCreated OnTileCreated;
+
 
     private Transform tileHolder;
 
@@ -66,6 +74,8 @@ public class GridGenerator : MonoBehaviour
         tile.SetPosition(new Vector2Int(xPos, zPos));
         
         rows[xPos].Tiles[zPos] = tile;
+
+        OnTileCreated?.Invoke(tile);
     }
 
     [ExecuteInEditMode, ContextMenu("Reset Grid")]
