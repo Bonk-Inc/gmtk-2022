@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float stepHeight = 1;
 
+    public event Action<GridTile> OnChangedPosition;
+
     public event Action OnMovementStart, OnMovementFinish, OnBonked;
 
     public void SetInstantLocation(Vector2Int position)
@@ -101,31 +103,6 @@ public class PlayerMovement : MonoBehaviour
         };
     }
 
-    private bool ChangeTile(Vector2Int position, out Coroutine moveAnimation)
-    {
-        var tile = grid.GetTileByPosition(position);
-        if (tile != null) return ChangeTile(tile, out moveAnimation);
-        moveAnimation = null;
-        return false;
-    }
-
-    private bool ChangeTile(GridTile tile, out Coroutine moveAnimation)
-    {
-        moveAnimation = null;
-        if (tile.Blocked)
-        {
-            OnBonked?.Invoke();
-            return false;
-        }
-        if (currentPosition != null) currentPosition.Blocked = false;
-
-        moveAnimation = StartCoroutine(MoveAnimation(transform.position, new Vector3(tile.transform.position.x, tile.transform.position.y + tile.transform.localScale.y, tile.transform.position.z)));
-        tile.Blocked = true;
-        currentPosition = tile;
-        return true;
-    }
-
-
     private bool ChangeTileInstant(Vector2Int position)
     {
         var tile = grid.GetTileByPosition(position);
@@ -144,6 +121,35 @@ public class PlayerMovement : MonoBehaviour
         if (currentPosition != null) currentPosition.Blocked = false;
 
         transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y + tile.transform.localScale.y, tile.transform.position.z);
+        OnChangedPosition?.Invoke(tile);
+        tile.Blocked = true;
+        currentPosition = tile;
+        return true;
+    }
+
+    private bool ChangeTile(Vector2Int position, out Coroutine moveAnimation)
+    {
+        var tile = grid.GetTileByPosition(position);
+        if (tile != null) return ChangeTile(tile, out moveAnimation);
+        moveAnimation = null;
+        return false;
+    }
+
+    private bool ChangeTile(GridTile tile, out Coroutine moveAnimation)
+    {
+        moveAnimation = null;
+        if (tile.Blocked)
+        {
+            OnBonked?.Invoke();
+            return false;
+        }
+        if (currentPosition != null) currentPosition.Blocked = false;
+
+        moveAnimation = StartCoroutine(MoveAnimation(
+            transform.position, 
+            new Vector3(tile.transform.position.x, tile.transform.position.y + tile.transform.localScale.y, tile.transform.position.z), 
+            () => OnChangedPosition?.Invoke(tile)
+        ));
         tile.Blocked = true;
         currentPosition = tile;
         return true;
@@ -151,7 +157,10 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-    private IEnumerator MoveAnimation(Vector3 startPoint, Vector3 endPoint)
+
+
+
+    private IEnumerator MoveAnimation(Vector3 startPoint, Vector3 endPoint, Action completed)
     {
         float t = 0;
         float cdStart = startPoint.x;
@@ -187,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
             t += Time.deltaTime / movementTime;
             yield return null;
         }
-
+        completed?.Invoke();
         transform.position = endPoint;
     }
 
