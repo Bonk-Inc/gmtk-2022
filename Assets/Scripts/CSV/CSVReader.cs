@@ -8,6 +8,7 @@ public class CSVReader
     public string[][] ReadFile(string path = "Levels", string fileName = "level")
     {
         var data = LoadResource(path, fileName);
+        if (data == null) return null;
         return ReadData(data.text);
     }
 
