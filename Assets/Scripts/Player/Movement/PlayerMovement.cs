@@ -17,8 +17,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private Direction movementDirection = Direction.North;
 
-    private Coroutine movementRoutine;
-
     public event Action OnMovementStart, OnMovementFinish, OnBonked;
 
     private void Awake() {
@@ -32,8 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Coroutine Move(int steps)
     {
-        movementRoutine = StartCoroutine(MoveSteps(steps));
-        return movementRoutine;
+        return StartCoroutine(MoveSteps(steps));
     }
 
     public void Rotate(Direction direction)
@@ -46,21 +43,16 @@ public class PlayerMovement : MonoBehaviour
     {
         OnMovementStart?.Invoke();
 
-        while (steps > 0)
+        Vector2Int nextPosition = currentPosition.Position + GetMovement();
+        while (steps > 0 && ChangeTile(nextPosition))
         {
-            var nextPosition = currentPosition.Position + GetMovement();
-            ChangeTile(nextPosition);
+            nextPosition = currentPosition.Position + GetMovement();
             steps--;
             yield return new WaitForSeconds(movementTime);
         }
-        FinishMovement();
         OnMovementFinish?.Invoke();
     }
 
-    public void FinishMovement()
-    {
-        if (movementRoutine != null) StopCoroutine(movementRoutine);
-    }
 
     private Vector2Int GetMovement()
     {
@@ -74,24 +66,25 @@ public class PlayerMovement : MonoBehaviour
         };
     }
 
-    private void ChangeTile(Vector2Int position)
+    private bool ChangeTile(Vector2Int position)
     {
         var tile = grid.GetTileByPosition(position);
-        if(tile != null) ChangeTile(tile);
+        if(tile != null) return ChangeTile(tile);
+        return false;
     }
 
-    private void ChangeTile(GridTile tile)
+    private bool ChangeTile(GridTile tile)
     {
         if (tile.Blocked)
         {
             OnBonked?.Invoke();
-            FinishMovement();
-            return;
+            return false;
         }
         if (currentPosition != null) currentPosition.Blocked = false;
 
         transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y + tile.transform.localScale.y, tile.transform.position.z);
         tile.Blocked = true;
         currentPosition = tile;
+        return true;
     }
 }
