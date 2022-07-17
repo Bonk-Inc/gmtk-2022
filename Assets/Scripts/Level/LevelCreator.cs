@@ -18,6 +18,9 @@ public class LevelCreator : MonoBehaviour
     [SerializeField]
     private GameObject wallPrefab;
 
+    [SerializeField]
+    private GameObject goalPrefab;
+
     public GridRow[] LoadLevel(string level)
     {
         // Step 1: Get Data
@@ -133,21 +136,9 @@ public class LevelCreator : MonoBehaviour
 
     private void SetGoal(GridTile tile, string setting)
     {
-        var settings = setting.Split("-");
-        tile.Blocked = true;
-        var wall = Instantiate(wallPrefab, tile.transform);
-        wall.transform.position = new Vector3(wall.transform.position.x, 1, wall.transform.position.z);
-        // TODO setting[0] Decides on wall model.
-        settings[1] = settings[1].Trim();
-        var rotation = settings[1] switch
-        {
-            "N" => -90f,
-            "S" => 90f,
-            "E" => 180f,
-            _ => 0f,
-        };
-
-        Vector3 rotationVector = new Vector3(-90, -rotation, 0);
-        wall.transform.rotation = Quaternion.Euler(rotationVector);
+        var goal = Instantiate(goalPrefab, tile.transform);
+        goal.transform.position = new Vector3(goal.transform.position.x, 1, goal.transform.position.z);
+        // TODO setting[0] Decides on goal model.
+        
     }
 }
