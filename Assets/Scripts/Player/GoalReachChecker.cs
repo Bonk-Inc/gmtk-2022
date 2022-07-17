@@ -10,10 +10,13 @@ public class GoalReachChecker : MonoBehaviour
     [SerializeField]
     private PlayerMovement movement;
 
+    [SerializeField]
+    private GamePhaseStateMachine phaseManager;
+
     private void Start() {
         movement.OnChangedPosition += (tile) => {
             if(tile.transform.childCount > 0 && tile.transform.GetChild(0).tag == GOAL_TAG){
-                Debug.Log("GOALIEE");
+                phaseManager.SetState(GamePhaseType.FINISHED);
             }
         };
     }

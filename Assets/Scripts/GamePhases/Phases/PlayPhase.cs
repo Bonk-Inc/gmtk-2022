@@ -9,12 +9,17 @@ public class PlayPhase : GamePhase
     [SerializeField]
     private DiceManager dice;
 
+    private bool left = false;
+
     public override void EnterPhase(GamePhaseStateMachine statemachine)
     {
+        left = false;
         StartCoroutine(PlayActions(statemachine));
     }
 
-    public override void LeavePhase(){}
+    public override void LeavePhase(){
+        left = true;
+    }
 
     public override void UpdateState(GamePhaseStateMachine statemachine){}
 
@@ -23,6 +28,8 @@ public class PlayPhase : GamePhase
         yield return StartCoroutine(dice.PlayDiceActions());
         dice.Clear();
         sound.Stop();
-        statemachine.SetState(GamePhaseType.STARTROUND);//TODO might change to npc turn later
+
+        if(!left)
+            statemachine.SetState(GamePhaseType.STARTROUND);//TODO might change to npc turn later
     }
 }
