@@ -10,6 +10,8 @@ public class LevelCreator : MonoBehaviour
     [SerializeField, Header("Dependencies")]
     private GridGenerator generator;
     [SerializeField]
+    private LevelPropCreator propCreator;
+    [SerializeField]
     private LevelInformation information;
     [SerializeField, Header("Settings - Most to be moved to different scripts.")]
     private StartPosition startPosition;
@@ -19,12 +21,7 @@ public class LevelCreator : MonoBehaviour
     [SerializeField]
     private GameObject wallCornerPrefab, wallNoSupportPrefab, wallNoSupportCornerPrefab;
 
-    [SerializeField, Header("Prop Prefabs")]
-    private GameObject standingLampPrefab;
-    [SerializeField]
-    private GameObject shortLampPrefab, armChairPrefab, bigSofaPrefab, bookshelfPrefab, bookPilePrefab, carpetPrefab, tvPrefab, tablePrefab, longTablePrefab, lampTablePrefab;
-
-
+    
     [SerializeField, Header("Goal Prefabs")]
     private GameObject goalPrefab;
 
@@ -124,7 +121,7 @@ public class LevelCreator : MonoBehaviour
 
         var setting = objectSetting.Split('_');
         
-        // TODO Could be an enum instead of just strings
+        // TODO Enum + Dictionary<Enum, Action>
         switch (setting[0])
         {
             case "PLAYER":
@@ -134,7 +131,7 @@ public class LevelCreator : MonoBehaviour
                 SetWall(tile, setting[1]);
                 break;
             case "PROP":
-                SetProp(tile, setting[1]);
+                propCreator.SetProp(tile, setting[1]);
                 break;
             case "GOAL":
                 SetGoal(tile, setting[1]);
@@ -193,45 +190,7 @@ public class LevelCreator : MonoBehaviour
         wall.transform.rotation = Quaternion.Euler(rotationVector);
     }
 
-    private void SetProp(GridTile tile, string setting)
-    {
-        var settings = setting.Split("-");
-
-        settings[0] = settings[0].Trim();
-        var prefab = settings[0] switch
-        {
-            "LAMP1" => standingLampPrefab,
-            "LAMP2" => shortLampPrefab,
-            "CHAIR1" => armChairPrefab,
-            "SOFA1" => bigSofaPrefab,
-            "SHELF1" => bookshelfPrefab,
-            "BOOKS1" => bookPilePrefab,
-            "CARPET1" => carpetPrefab,
-            "TV1" => tvPrefab,
-            "TABLE1" => tablePrefab,
-            "TABLE2" => longTablePrefab,
-            _ => lampTablePrefab
-        };
-        if (prefab.Equals(longTablePrefab)) print("HENKIE");
-        var prop = Instantiate(prefab, tile.transform);
-        prop.transform.localPosition = Vector3.zero;
-
-        settings[1] = settings[1].Trim();
-        var rotation = settings[1] switch
-        {
-            "N" => -90f,
-            "S" => 90f,
-            "E" => 180f,
-            _ => 0f,
-        };
-
-        Vector3 rotationVector = new Vector3(0, -rotation, 0);
-        prop.transform.rotation = Quaternion.Euler(rotationVector);
-
-        settings[2] = settings[2].Trim();
-        tile.Blocked = settings[2].Equals("F");
-
-    }
+    
 
     private void SetGoal(GridTile tile, string setting)
     {
