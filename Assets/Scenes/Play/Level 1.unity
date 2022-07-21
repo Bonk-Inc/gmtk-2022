@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.21726498, g: 0.5471705, b: 0.66864514, a: 1}
+  m_IndirectSpecularColor: {r: 0.2169739, g: 0.5469571, b: 0.66868615, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -739,6 +739,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864f19e4facf0334eb9591d2eb746e22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &557565997 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3343115849087071965, guid: e1e58784ee4b98f47a752c23a05d347e, type: 3}
+  m_PrefabInstance: {fileID: 697102498}
+  m_PrefabAsset: {fileID: 0}
 --- !u!82 &602096432 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 602096432, guid: 9257f7f11044b8247a55ae207de78486, type: 3}
@@ -953,6 +958,22 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1414946922, guid: e1e58784ee4b98f47a752c23a05d347e, type: 3}
+      propertyPath: propCreator
+      value: 
+      objectReference: {fileID: 1414946932}
+    - target: {fileID: 1414946922, guid: e1e58784ee4b98f47a752c23a05d347e, type: 3}
+      propertyPath: wallCreator
+      value: 
+      objectReference: {fileID: 1414946933}
+    - target: {fileID: 1414946922, guid: e1e58784ee4b98f47a752c23a05d347e, type: 3}
+      propertyPath: playerCreator
+      value: 
+      objectReference: {fileID: 1414946931}
+    - target: {fileID: 1414946923, guid: e1e58784ee4b98f47a752c23a05d347e, type: 3}
+      propertyPath: position.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3343115849087071942, guid: e1e58784ee4b98f47a752c23a05d347e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1059,6 +1080,10 @@ PrefabInstance:
       propertyPath: grid
       value: 
       objectReference: {fileID: 1414946911}
+    - target: {fileID: 832958988518818057, guid: 5512ea571fe78cd45b7a44019df0a482, type: 3}
+      propertyPath: yPosMargin
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 832958988518818062, guid: 5512ea571fe78cd45b7a44019df0a482, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -1795,7 +1820,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 751401336384119923, guid: e1e58784ee4b98f47a752c23a05d347e, type: 3}
   m_PrefabInstance: {fileID: 697102498}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 557565997}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 538d4e677270be6428320a20c07778d6, type: 3}
@@ -1806,12 +1831,67 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1414946923, guid: e1e58784ee4b98f47a752c23a05d347e, type: 3}
   m_PrefabInstance: {fileID: 697102498}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 557565997}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a256a09c85ae35d418164117adb2d768, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1414946931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557565997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b92c4829fa8154ba2c2cbc35a1705f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerObject: {fileID: 1770348998}
+  startPosition: {fileID: 1414946923}
+  kidJustinPrefab: {fileID: 8631963931008528486, guid: a3bf570820bdf104bbc389d784de24f5, type: 3}
+  guitaristDjoestPrefab: {fileID: 8631963931008528486, guid: a3bf570820bdf104bbc389d784de24f5, type: 3}
+--- !u!114 &1414946932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557565997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a64fdd7e9bdb694e9a7b7644d795323, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  standingLampPrefab: {fileID: 4215364404235133139, guid: 1923e7b4bf932f0788405e2213dbba23, type: 3}
+  shortLampPrefab: {fileID: 4215364404235133139, guid: 47fe984eeb1c7d0d48be333907a80a97, type: 3}
+  armChairPrefab: {fileID: 4215364404235133139, guid: 4a74b59d63c6ce8e89f33651a778f3ad, type: 3}
+  bigSofaPrefab: {fileID: 4215364404235133139, guid: 690a06ccf9079a1b58bda9ccc833d04f, type: 3}
+  bookshelfPrefab: {fileID: 4215364404235133139, guid: 9c7b387c878e03ffb849b4fd7e2adcad, type: 3}
+  bookPilePrefab: {fileID: 4215364404235133139, guid: 74a53f391a5f7e04e88f305e6b6a5d20, type: 3}
+  carpetPrefab: {fileID: 4215364404235133139, guid: 87522a535f05d49d7a5179f6d896a636, type: 3}
+  tvPrefab: {fileID: 4215364404235133139, guid: 5316202aab156b240a204d2c83d1c881, type: 3}
+  tablePrefab: {fileID: 4215364404235133139, guid: 318ff800717dac0fb80e0edc3a0c9ca2, type: 3}
+  longTablePrefab: {fileID: 4215364404235133139, guid: 75547f8fef68ef038b3eb0ba3172be7d, type: 3}
+  lampTablePrefab: {fileID: 4215364404235133139, guid: 10eb85cfb721244f4bea76dfd49cc6aa, type: 3}
+--- !u!114 &1414946933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557565997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32ad3ce7fbac21b4a90cecea7353bbb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallPrefab: {fileID: 4215364404235133139, guid: c8eb6ce59bce8544e8824b358c3afffa, type: 3}
+  wallCornerPrefab: {fileID: 4215364404235133139, guid: b2a3ff0c861eb8044be3a00597fb85a8, type: 3}
+  wallNoSupportPrefab: {fileID: 4215364404235133139, guid: 06d9d258f81a6f34fa5648713bd6a84b, type: 3}
+  wallNoSupportCornerPrefab: {fileID: 4215364404235133139, guid: 0355021891a22c542bd8cec3b020e97c, type: 3}
 --- !u!114 &1458038227 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 739790252, guid: 1b2ce9042dfabc14786e8fab9edabd1a, type: 3}
@@ -2504,6 +2584,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1706612973}
   m_CullTransparentMesh: 1
+--- !u!4 &1770348998 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 832958988518818062, guid: 5512ea571fe78cd45b7a44019df0a482, type: 3}
+  m_PrefabInstance: {fileID: 995879433}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1770988870
 PrefabInstance:
   m_ObjectHideFlags: 0
