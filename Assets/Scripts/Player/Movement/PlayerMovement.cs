@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField, Header("Movement Settings")]
     private float movementTime = 0.5f, rotationTime = 0.5f;
+    [SerializeField]
+    private float yPosMargin = 1;
 
     [SerializeField, Header("Game Information - Read Only!")]
     private GridTile currentPosition;
@@ -120,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (currentPosition != null) currentPosition.Blocked = false;
 
-        transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y + tile.transform.localScale.y, tile.transform.position.z);
+        transform.position = new Vector3(tile.transform.position.x, tile.transform.position.y + tile.transform.localScale.y + yPosMargin, tile.transform.position.z);
         OnChangedPosition?.Invoke(tile);
         tile.Blocked = true;
         currentPosition = tile;
@@ -147,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
 
         moveAnimation = StartCoroutine(MoveAnimation(
             transform.position, 
-            new Vector3(tile.transform.position.x, tile.transform.position.y + tile.transform.localScale.y, tile.transform.position.z), 
+            new Vector3(tile.transform.position.x, tile.transform.position.y + tile.transform.localScale.y + yPosMargin, tile.transform.position.z), 
             () => OnChangedPosition?.Invoke(tile)
         ));
         tile.Blocked = true;

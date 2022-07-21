@@ -10,17 +10,13 @@ public class LevelCreator : MonoBehaviour
     [SerializeField, Header("Dependencies")]
     private GridGenerator generator;
     [SerializeField]
+    private LevelInformation information;
+    [SerializeField, Header("Creators")]
     private LevelPropCreator propCreator;
     [SerializeField]
-    private LevelInformation information;
-    [SerializeField, Header("Settings - Most to be moved to different scripts.")]
-    private StartPosition startPosition;
-
-    [SerializeField, Header("Wall Prefabs")]
-    private GameObject wallPrefab;
+    private LevelPlayerCreator playerCreator;
     [SerializeField]
-    private GameObject wallCornerPrefab, wallNoSupportPrefab, wallNoSupportCornerPrefab;
-
+    private LevelWallCreator wallCreator;
     
     [SerializeField, Header("Goal Prefabs")]
     private GameObject goalPrefab;
@@ -52,7 +48,6 @@ public class LevelCreator : MonoBehaviour
         var grid = generator.CreateGrid(data.Length -1, data[1].Length);
 
         // Step 4: Read and use Data
-        
         SetLevelData(data, grid);
 
         return grid;
@@ -86,12 +81,12 @@ public class LevelCreator : MonoBehaviour
             {
                 var tileData = data[i][j];
                 var tile = row.Tiles[j];
-                SetTileData(tileData, tile, row);
+                SetTileData(tileData, tile);
             }
         }
     }
 
-    private void SetTileData(string data, GridTile tile, GridRow row)
+    private void SetTileData(string data, GridTile tile)
     {
         data = data.Trim();
         if (data.Equals("NONE"))
@@ -125,10 +120,10 @@ public class LevelCreator : MonoBehaviour
         switch (setting[0])
         {
             case "PLAYER":
-                SetPlayer(tile, setting[1]);
+                playerCreator.SetPlayer(tile, setting[1]);
                 break;
             case "WALL":
-                SetWall(tile, setting[1]);
+                wallCreator.SetWall(tile, setting[1]);
                 break;
             case "PROP":
                 propCreator.SetProp(tile, setting[1]);
@@ -139,64 +134,12 @@ public class LevelCreator : MonoBehaviour
             default:
                 break;
         }
-        
     }
-
-    private void SetPlayer(GridTile tile, string setting)
-    {
-        startPosition.SetPosition(tile.Position, true);
-        var settings = setting.Split("-");
-
-        // TODO setting[0] Decides on player model.
-
-        // TODO Do we want NWSE or rather have it numbered?
-        settings[1] = settings[1].Trim();
-        startPosition.MoveDirection = settings[1] switch
-        {
-            "W" => Direction.West,
-            "S" => Direction.South,
-            "E" => Direction.East,
-            _ => Direction.North,
-        };
-    }
-
-    private void SetWall(GridTile tile, string setting)
-    {
-        var settings = setting.Split("-");
-        tile.Blocked = true;
-
-        settings[0] = settings[0].Trim();
-        var prefab = settings[0] switch
-        {
-            "1" => wallPrefab,
-            "2" => wallCornerPrefab,
-            "3" => wallNoSupportPrefab,
-            _ => wallNoSupportCornerPrefab
-        };
-        var wall = Instantiate(prefab, tile.transform);
-        wall.transform.localPosition = Vector3.zero;
-
-
-        settings[1] = settings[1].Trim();
-        var rotation = settings[1] switch
-        {
-            "N" => -90f,
-            "S" => 90f,
-            "E" => 180f,
-            _ => 0f,
-        };
-
-        Vector3 rotationVector = new Vector3(0, -rotation, 0);
-        wall.transform.rotation = Quaternion.Euler(rotationVector);
-    }
-
-    
 
     private void SetGoal(GridTile tile, string setting)
     {
         var goal = Instantiate(goalPrefab, tile.transform);
         goal.transform.position = new Vector3(goal.transform.position.x, 1, goal.transform.position.z);
         // TODO setting[0] Decides on goal model.
-        
     }
 }
