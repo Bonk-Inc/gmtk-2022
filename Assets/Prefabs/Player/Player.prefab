@@ -35,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &832958988518818061
 CapsuleCollider:
@@ -66,6 +66,7 @@ MonoBehaviour:
   grid: {fileID: 0}
   movementTime: 0.5
   rotationTime: 0.5
+  yPosMargin: -1
   currentPosition: {fileID: 0}
   movementDirection: 0
   stepHeight: 1

@@ -1052,6 +1052,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1414946931, guid: e1e58784ee4b98f47a752c23a05d347e, type: 3}
+      propertyPath: playerObject
+      value: 
+      objectReference: {fileID: 1525282081}
     - target: {fileID: 751401336384119923, guid: e1e58784ee4b98f47a752c23a05d347e, type: 3}
       propertyPath: level
       value: level-2
@@ -2266,6 +2270,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517716105}
   m_CullTransparentMesh: 1
+--- !u!4 &1525282081 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 832958988518818062, guid: 5512ea571fe78cd45b7a44019df0a482, type: 3}
+  m_PrefabInstance: {fileID: 995879433}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1594943920
 GameObject:
   m_ObjectHideFlags: 0
